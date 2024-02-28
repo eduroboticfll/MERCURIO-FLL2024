@@ -21,4 +21,4 @@ PROIEKTU karpeta barruan MATLAB eta BLENDER erabili ditugun script-ak aurkituko 
 
 En la carpeta ROBOT encontrarás los archivos y el código de nuestro robot. Además también hay fotos del robot y de los gadgets.
 
-ROBOT karpeta barruan gure robotaren fitxategiak eta kodea aurkituko dituzu. Gainera, robotaren eta gadget-en argazkiak ere daude."
+ROBOT karpeta barruan gure robotaren fitxategiak eta kodea aurkituko dituzu. Gainera, robotaren eta gadget-en argazkiak ere daude.
