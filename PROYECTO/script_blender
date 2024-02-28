@@ -1,0 +1,27 @@
+import bpy
+
+import csv
+
+# Ruta del archivo CSV (cambia a la ruta de tu archivo)
+ruta_csv = "C:/Users/Ikasle/Downloads/coordenadas_recorte.csv"
+
+# Lee los datos desde el archivo CSV
+datos = []
+with open(ruta_csv, 'r') as archivo:
+lector_csv = csv.DictReader(archivo)
+  for fila in lector_csv:
+    x = float(fila['x'])
+    y = float(fila['y'])
+    z = float(fila['z'])
+    datos.append((x, y, z))
+
+# Borra todos los objetos existentes en la escena
+bpy.ops.object.select_all(action='DESELECT')
+bpy.ops.object.select_by_type(type='MESH')
+bpy.ops.object.delete()
+
+# Crea un prisma cuadrado en cada punto x, y, z
+for x, y, z in datos:
+  bpy.ops.mesh.primitive_cube_add(size=1, location=(x, y, z / 2))
+  cubo = bpy.context.active_object
+  cubo.scale.z = z
