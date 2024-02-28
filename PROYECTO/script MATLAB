@@ -1,0 +1,28 @@
+% 1. Cargar la imagen
+imagen = imread('Recorte_Pajaro.jpg'); % Cambia 'tu_imagen.jpg' al nombre de tu archivo de imagen
+
+% 2. Obtener dimensiones de la imagen
+[filas, columnas, canales] = size(imagen);
+
+% 3. Crear matrices de coordenadas x, y
+[x, y] = meshgrid(int16(1:columnas), int16(1:filas));
+coordenadas_x = x(:);
+coordenadas_y = y(:);
+
+% 4. Convertir las matrices de coordenadas en vectores
+coordenadas_xy = [coordenadas_x, coordenadas_y];
+
+% 5. Reshape la imagen para obtener una matriz de valores de color
+valores_color = double(reshape(imagen, [], canales)) / 255; % Normalizar a valores entre 0 y 1
+
+% 6. Calcular la luminosidad para todos los píxeles
+Luminosidad = 0.299 * valores_color(:, 1) + 0.587 * valores_color(:, 2) + 0.114 * valores_color(:, 3);
+
+% 7. Reescalar la luminosidad al rango de 0 a 20
+LuminosidadReescalada = (Luminosidad - min(Luminosidad)) / (max(Luminosidad) - min(Luminosidad)) * 30;
+
+% 8. Crear matriz de coordenadas y luminosidad reescalada
+coordenadas_luminosidad = [coordenadas_xy, LuminosidadReescalada];
+
+% 9. Guardar las coordenadas y luminosidad reescalada en un archivo CSV
+writematrix(coordenadas_luminosidad, 'coordenadas_recorte.csv');
